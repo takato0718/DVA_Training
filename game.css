@@ -1,0 +1,207 @@
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 基本スタイル */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ゲームコンテナ */
+.game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+}
+
+/* タイトル */
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-align: center;
+}
+
+/* スコア表示 */
+.score {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 文字移動エリア */
+.display-area {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown {
+    font-size: 80px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.moving-text-container {
+    width: 100%;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0;
+    border-radius: 8px;
+}
+
+.moving-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+/* 移動アニメーション */
+@keyframes moveText {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}
+
+/* 入力エリア */
+.input-area {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.instruction {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.text-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 24px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.submit-btn {
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* フィードバック */
+.feedback {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
+.feedback.correct {
+    background: #4CAF50;
+    color: white;
+    display: block;
+}
+
+.feedback.incorrect {
+    background: #F44336;
+    color: white;
+    display: block;
+}
+
+/* Twitterボタン */
+.twitter-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #1DA1F2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+}
+
+.twitter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(29, 161, 242, 0.4);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .moving-text {
+        font-size: 32px;
+    }
+    
+    .text-input {
+        font-size: 18px;
+    }
+}
