@@ -1,0 +1,36 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲーム - 動体視力トレーニング</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- ゲーム情報 -->
+        <div class="game-info">
+            <p>問題: <span id="current-round">1</span> / 10</p>
+            <p>正解数: <span id="correct-count">0</span></p>
+        </div>
+
+        <!-- 文字移動エリア -->
+        <div id="display-area" class="display-area">
+            <p id="countdown" class="countdown">3</p>
+            <div id="moving-text-container" class="moving-text-container">
+                <p id="moving-text" class="moving-text"></p>
+            </div>
+        </div>
+
+        <!-- 入力エリア -->
+        <div id="input-area" class="input-area" style="display:none;">
+            <p class="instruction">見えた文字列を入力してください</p>
+            <input type="text" id="user-input" class="text-input" placeholder="ここに入力" autocomplete="off">
+            <button onclick="checkAnswer()" class="submit-btn">回答する</button>
+        </div>
+
+        <!-- フィードバック -->
+        <div id="feedback" class="feedback"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
