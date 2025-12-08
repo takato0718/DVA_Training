@@ -85,10 +85,10 @@ h1 {
 /* 移動アニメーション */
 @keyframes moveText {
     from {
-        left: 100%;
+        transform: translateX(100%) translateY(-50%);
     }
     to {
-        left: -100%;
+        transform: translateX(-100%) translateY(-50%);
     }
 }
 
