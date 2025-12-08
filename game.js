@@ -6,6 +6,7 @@ const MOVE_DURATION = 1000; // 文字の移動時間(ミリ秒) - 難しい設�
 let currentRound = 1;
 let correctCount = 0;
 let targetText = '';
+let gameTextList = [];
 
 // 出題する文字列リスト
 const TEXT_LIST = [
@@ -33,8 +34,43 @@ const TEXT_LIST = [
 
 // ゲーム開始
 window.onload = function() {
+    prepareGameTextList(); // ゲーム用の問題リストを作成(重複なし)
     startCountdown(); //　以下のカウントダウンがロードされたらすぐさま実行される
 };
+
+// 配列をシャッフルする関数(Fisher-Yatesアルゴリズム)
+function shuffleArray(array) {
+    // 元の配列を変更しないようにコピーを作成
+    const newArray = [...array];
+    
+    // 配列の最後から順番に処理
+    for (let i = newArray.length - 1; i > 0; i--) {
+        // 0からi番目までのランダムな位置を取得
+        const j = Math.floor(Math.random() * (i + 1));
+        
+        // i番目とj番目の要素を入れ替え
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    
+    return newArray;
+}
+
+// ゲーム用の問題リストを準備
+function prepareGameTextList() {
+    // TEXT_LISTをシャッフル
+    const shuffled = shuffleArray(TEXT_LIST);
+    
+    // 最初の10個を取得
+    gameTextList = shuffled.slice(0, TOTAL_ROUNDS);
+    
+    console.log('今回の問題リスト:', gameTextList); // デバッグ
+}
+
+// ランダムに文字列を選択
+function getRandomText() {
+    // gameTextListから現在のラウンドに対応する問題を取得
+    return gameTextList[currentRound - 1];
+}
 
 // カウントダウン
 function startCountdown() {
@@ -58,15 +94,6 @@ function startCountdown() {
             showMovingText(); // ゲームが始まる
         }
     }, 1000);
-}
-
-// ランダムに文字列を選択
-function getRandomText() { // ランダムに文字列を取得する関数を定義
-    const randomIndex = Math.floor(Math.random() * TEXT_LIST.length); 
-    // TEXT_LISTの要素数を取得、 Math.random()は0以上1未満のランダムな小数を生成する
-    // つまり、ランダムな小数に配列の長さを掛け算してる
-    // Math.floor()は小数点以下を切り捨てる
-    return TEXT_LIST[randomIndex];
 }
 
 // 文字を移動表示
@@ -107,7 +134,7 @@ function checkAnswer() { // 回答ボタン、enter keyを押した時発動
     // 正誤判定
     if (userInput === targetText) { // 入力した言葉が回答と一致するかどうか
         correctCount++; // 正解した場合正解数を＋１
-        feedbackEl.textContent = '正解!🎉'; 
+        feedbackEl.textContent = '正解!'; 
         feedbackEl.className = 'feedback correct';
     } else {
         feedbackEl.textContent = `不正解...正解は「${targetText}」でした`;
