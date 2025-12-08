@@ -1,6 +1,7 @@
 const TOTAL_ROUNDS = 10; // 問題数
 const COUNTDOWN_TIME = 3; // カウントダウン
-const MOVE_DURATION = 1000; // 文字の移動時間(ミリ秒) - 難しい設定
+const MOVE_DURATION = 100; // 文字の移動時間(ミリ秒) - 難しい設定
+const DURATION_PER_CHAR = 40;   // 1文字あたりの追加時間
 
 // ゲームの状態
 let currentRound = 1;
@@ -10,26 +11,26 @@ let gameTextList = [];
 
 // 出題する文字列リスト
 const TEXT_LIST = [
-    'HELLO',
-    'WORLD',
-    'JAVASCRIPT',
-    'PROGRAMMING',
-    'RUNTEQ',
-    'TRAINING',
-    'SPEED',
-    'READING',
-    'CHALLENGE',
-    'SUCCESS',
-    'DYNAMIC',
-    'VISION',
-    'QUICK',
-    'FOCUS',
-    'MASTER',
-    'BRAIN',
-    'POWER',
-    'SKILL',
-    'LEVEL',
-    'GAME'
+    '何をするだァーッ',
+    'おまえは今まで食ったパンの枚数を覚えているのか？',
+    'メメタァ',
+    '逃げるんだよォ！',
+    '飲んどる場合かーッ',
+    '歩道が広いではないか、行け',
+    'もしかしてオラオラですか？',
+    '嘘をついてる味',
+    '故郷に帰ったら学校行くよ',
+    'お茶でも飲んで話でもしようや',
+    '俺はアポロ11号なんだ',
+    '素数を数えて落ち着くんだ',
+    'いともたやすく行われるえげつない行為',
+    '我が心と行動に一点の曇りなし全てが正義だ',
+    'だがそれが逆に妹の夫の逆鱗に触れた',
+    '法律が許すならオメーらの命なんてどーでもいいけどさあ',
+    'だが断る',
+    'うるさいわね！勝手に赤になった信号が悪いのよ',
+    '質問を質問で返すな',
+    'マルクはただの若者だった'
 ];
 
 // ゲーム開始
@@ -104,8 +105,15 @@ function showMovingText() {
     // 文字列を設定
     movingTextEl.textContent = targetText;
     
+    const textLength = targetText.length;
+    const moveDuration = MOVE_DURATION + (textLength * DURATION_PER_CHAR);
+
+    console.log(`文字: ${targetText}`);
+    console.log(`文字数: ${textLength}`);
+    console.log(`アニメーション時間: ${moveDuration}ms`);
+
     // アニメーションを設定
-    movingTextEl.style.animation = `moveText ${MOVE_DURATION}ms linear`;
+    movingTextEl.style.animation = `moveText ${moveDuration}ms linear`;
     // movingTextEl.style.animationで、要素の animation CSSプロパティを設定している　JSから直接CSSを操作する
     // `moveText ${MOVE_DURATION}ms linear`、これは一定の速度で一秒間テキストが動く
 
@@ -114,12 +122,12 @@ function showMovingText() {
         document.getElementById('display-area').style.display = 'none'; // 1秒後に文字表示エリアが非表示
         document.getElementById('input-area').style.display = 'block'; // テキストが表示された1秒後にテキスト入力欄が表示される
         document.getElementById('user-input').focus(); // テキスト入力欄が表示されると自動でキーボード入力可能状態になる
-    }, MOVE_DURATION);
+    }, moveDuration);
 }
 
 // 回答をチェック
 function checkAnswer() { // 回答ボタン、enter keyを押した時発動
-    const userInput = document.getElementById('user-input').value.trim().toUpperCase();
+    const userInput = document.getElementById('user-input').value.trim();
     // htmlのuser-inputの情報を取得
     // .valueで入力欄に入力された文字列を取得
     // .trim()で文字列の前後の空白(スペース)を削除, 不要なスペースで不正解にならないようにする
