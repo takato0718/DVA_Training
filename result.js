@@ -88,7 +88,7 @@ function shareOnTwitter(correctCount, totalCount) {
     const message = getResultMessage(correctCount, totalCount);
 
     const text = `動体視力トレーニングで${totalCount}問中${correctCount}問正解しました!\n${message}\nあなたも挑戦してみよう!`;
-    const url = window.location.origin; // 現在のページのURL
+    const url = 'https://takato0718.github.io/DVA_Training/'; // 現在のページのURL
     const hashtags = 'DVAトレーニング';
     
     // Twitter Web Intent URL
